@@ -6,7 +6,7 @@
 
 ## CAVEAT
 
-THIS IS WORK IN PROGRESS!!! THE IMPLEMENTATIONS ARE CRUDE AND WERE DONE IN A HURRY. IN PARTICULAR, WE DID NOT ALWAYS CODE THE FEATURES IN THE CORRECT WAY. DUE TO TIME CONSTRAINTS, THIS EVALUATION CODE WILL BE USED IN PRODUCTION, BUT WE HOPE TO UPDATE IT AT SOME POINT. YOU SHOULD PROBABLY NOT USE THIS CODE YOURSELF, AS IT MIGHT NOT WORK FOR YOU OR EVEN BREAK YOUR SYSTEM (SEE ALSO 'LICENSE'). UNDER NO CIRCUMSTANCES WHATSOEVER ARE WE TO BE HELD LIABLE FOR ANYTHING. YOU HAVE BEEN WARNED.
+THIS IS PART WORK IN PROGRESS, PART OUTDATED WORK!!! THE IMPLEMENTATIONS ARE CRUDE AND WERE DONE IN A HURRY. IN PARTICULAR, WE DID NOT ALWAYS CODE THE FEATURES IN THE CORRECT WAY. DUE TO TIME CONSTRAINTS, THIS EVALUATION CODE WILL BE USED IN PRODUCTION, BUT WE HOPE TO UPDATE IT AT SOME POINT. YOU SHOULD PROBABLY NOT USE THIS CODE YOURSELF, AS IT MIGHT NOT WORK FOR YOU OR EVEN BREAK YOUR SYSTEM (SEE ALSO 'LICENSE'). UNDER NO CIRCUMSTANCES WHATSOEVER ARE WE TO BE HELD LIABLE FOR ANYTHING. YOU HAVE BEEN WARNED.
 
 ## Installation
 
@@ -52,9 +52,10 @@ This is set up to include only the files described in this section:
 !/LICENSE
 !/migration-progress.php
 !/migration-progress.conf
+!/author-list.php
 ```
 
-### `migration-progress.php`
+### `migration-progress.php` (@unmaintained)
 
 This page displays progress bars per publication type regarding the amount of migrated objects from the source (RefWorks/FileMaker) into [DORA](https://www.dora.lib4ri.ch). It shows bi-coloured bars, in dependence of the correction status of the publication.
 
@@ -62,14 +63,26 @@ The logic hinges on manually entering the total per publication type (although i
 
 The code has several shortcomings (besides style). Chiefly among them is a buggy mechanism to ignore certain correction markers (since it matches substrings). Also, the part that counts publications should probably be revisited, as it might not cope too well once the migration is finished and new publications are ingested (at least the autocompletion seems to fail).
 
-### `migration-progress.conf`
+Note: We actually do not use this code any longer. We post it for inspiration and reference. If we should need it again and find the time, we will probably update it. Do not hold your breath, though.
+
+### `migration-progress.conf` (@unmaintained)
 
 This file contains the latest setup for the three subsites [DORA Eawag](https://www.dora.lib4ri.ch/eawag), [DORA Empa](https://www.dora.lib4ri.ch/empa) and [DORA WSL](https://www.dora.lib4ri.ch/wsl). You can replace the generic data in `migration-progress.php` between the markers `/***** EDIT THIS PART ONLY *****/` and `/*******************************/` with the section of interest.
+
+### `author-list.php`
+
+This page allows the user to browse through the (alphabetically ordered) list of affiliated authors who have publications in [DORA](https://www.dora.lib4ri.ch). It groups the authors by their name's starting letter and has a (slightly faulty) pager to limit the result set. In addition, it has a very simplistic search field.
+
+The page is, actually, operated through the url (via query). The starting letter can be specified using `letter=...` (it defaults to `letter=A`), and a search can be triggered using `find=...`. Moreover, the query has two "hidden" features:
+* Specifying `letter=*` will show _all_ authors in alphabetical order
+* Adding `showall` or setting `showall` to `true` or any non-zero integer will show affiliated authors, even if they currently have no publications in [DORA](https://www.dora.lib4ri.ch).
 
 ## @TODO
 
 * Modify the mechanism for excluding certain markers in `migration-progress.php`
 * Review the counting and autocomplete mechanism in `migration-progress.php`
+* Correct the pager in `author-list.php`
+* Re-implement `author-list.php` as an external module using proper templates/themes
 
 <br/>
 > _This document is Copyright &copy; 2017 by d-r-p (Lib4RI) `<d-r-p@users.noreply.github.com>` and licensed under [CC&nbsp;BY&nbsp;4.0](https://creativecommons.org/licenses/by/4.0/)._
