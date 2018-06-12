@@ -1,0 +1,55 @@
+# DORA Content Policy
+
+## The 'DORA Lib4Ri Content Policy' on Dev1:<tt>
+   - http://dev1.example.com/eawag/dora_content_policy
+   - http://dev1.example.com/empa/dora_content_policy
+   - http://dev1.example.com/psi/dora_content_policy
+   - http://dev1.example.com/wsl/dora_content_policy
+</tt>
+Server location of the (original) Policy document is on Prod1/Eawag, however this document (as HTML) will be used for all 4 institute sub-sites.
+http://prod1.example.com/eawag/dora_content_policy_raw
+
+
+## Work steps
+* To prepare your policy document:<tt>
+   - MS Word: Open your *.docx + Save it as html/filtered.
+   - Notepad: Copy all the HTML source code from this file.
+   - Drupal : Log in on Prod1 on Eawag.
+   - Drupal : Content - Add content - basic page - text format 'PHP code'.
+   - Drupal : Set any title + Paste HTML code into text/body box.
+   - Drupal : Ensure the alias is 'dora_content_policy_raw' + Publish.
+   - Drupal : Configuration - Performance - Clear all Caches (if not admin)
+   - Online : Test it online (...but so far not on Prod1 yet).
+		- http://prod1.example.com/eawag/dora_content_policy
+		- http://prod1.example.com/empa/dora_content_policy
+		- http://prod1.example.com/wsl/dora_content_policy
+		( http://prod1.example.com/psi/dora_content_policy )
+</tt>
+* To create the Durpal node/page.<tt>
+   - Rename your PDF by attaching "_as.png" onto the PDF file name to
+     pretend an image, example: Lib4RI-2018.pdf => Lib4RI-2018.pdf_as.png
+   - In Drupal: 'Add content', select 'Image Block', press the 'Browse' button
+     to select your renamed PDF/Png, do NOT press 'upload' (just showing the
+     file name inside the selection field will be sufficient).
+   - Copy the image link or add content/code in the text area.
+   - Press 'Save' on the button of the page.
+</tt>
+
+
+## Issues:<tt>
+   - Edit+Save will not work unless you remove the PDF/Png file and readd it again (just press 'remove', then 'browse', but not 'upload').
+   - Layout: The style of the original policy document may not really be
+     in sync with the style of the Drupal website, you can try it out:
+      - Original document CSS widely removed (default):
+        http://dev1.example.com/eawag/dora_content_policy?css=none
+      - Original document CSS widely maintained:
+        http://dev1.example.com/eawag/dora_content_policy?css=orig
+      - Proprietary CSS tuning:
+        http://dev1.example.com/eawag/dora_content_policy?css=prop
+   - Online access to the original 'raw' policy: The stored policy on
+     the Prod1 server has to be *published* in Drupal. Although there
+     is no link obvious, it can be accessed if you know where:
+     http://prod1.example.com/eawag/dora_content_policy_raw
+</tt>
+
+
