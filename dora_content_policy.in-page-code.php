@@ -1,9 +1,10 @@
 <?php
 /*
-	DORA Content Policy - v03d / 17-Apr-2018 - for Drupal node/page
+	DORA Content Policy - for Drupal
+	v03e / 07-Sep-2018 / by Frank Hoesli / eawag.ch
 
 	Purpose: Goal of this script here is to extract content of a given html document 
-	referenced by a CMS alias (here concretely 'dora_content_policy_data') and
+	here concretely * https://www.dora.lib4ri.ch/eawag/dora_content_policy_data * and
 	to insert it into institute-specific document by relacing placeholders with the
 	institute name which will be detected by the url (or by the 'inst' url argument).
 
@@ -25,7 +26,7 @@ $_alias  = ( @!empty($_GET['alias']) ) ? rawurldecode($_GET['alias']) : "dora_co
 $_inst   = ( @!empty($_GET['inst'] ) ) ? rawurldecode($_GET['inst'] ) : "";			// optional, will be auto-detect otherwise
 $_d_css  = ( @!empty($_GET['css']  ) ) ? rawurldecode($_GET['css']  ) : "prop|none|orig";		// the 1st entry will count.
 $_d_img  = ( @!empty($_GET['img']  ) ) ? rawurldecode($_GET['img']  ) : "none";
-$_i_sub  = ( @!empty($_GET['sub']  ) ) ? rawurldecode($_GET['sub']  ) : "[Eawag / Empa / PSI / WSL]|Eawag";		// to subst $_inst with ('|'=%7C)
+$_i_sub  = ( @!empty($_GET['sub']  ) ) ? rawurldecode($_GET['sub']  ) : "[Eawag / Empa / PSI / WSL]|Eawag|eawag";		// to subst $_inst with ('|'=%7C)
 $_d_rep  = ( @!empty($_GET['rep']  ) ) ? rawurldecode($_GET['rep']  ) : "";	// to replace a term basically, use a | resp. to separate
 $_d_skip = ( @!empty($_GET['skip'] ) ) ? rawurldecode($_GET['skip'] ) : "";	// all (code) rows containing this will be ignored/removed.
 
@@ -230,7 +231,12 @@ if ( !empty($_d_rep) ) { $html_body = str_replace( strtok($_d_rep."|","|"), subs
 if ( !empty($_i_sub) )
 {
 	$tmpAry = explode( "|", $_i_sub );
-	foreach( $tmpAry as $part ) { $html_body = str_replace( $part, $instAry[$_inst], $html_body ); }
+	foreach( $tmpAry as $part ) {
+		if ( $part == strtolower($part) || strchr($part,strtolower($instAry[$_inst])) ) {
+			$html_body = str_replace( $part, strtolower($instAry[$_inst]), $html_body );
+		}
+		else { $html_body = str_replace( $part, $instAry[$_inst], $html_body ); }
+	}
 }
 
 // replace generally:
