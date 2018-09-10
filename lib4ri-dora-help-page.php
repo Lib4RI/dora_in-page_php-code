@@ -1,16 +1,15 @@
 <?php
 
 // saving the institute's name into a PHP variable, once for display, once for links (lower case).
-$inst_link = strtolower( dirname($_SERVER['SCRIPT_NAME']) );	// something like '/eawag'
-if ( strlen($inst_link) < 2 /* if on main site: */ ) {
-	$inst_link = "";
+$inst_label = strtolower( dirname($_SERVER['SCRIPT_NAME']) );	// something like '/eawag' or simply '/'
+if ( strlen($inst_label) < 2 /* if on main site: */ ) {
 	$inst_label = "4RI";
 } else {		// for all the sub-institutes:
-	$inst_label = ( strlen($inst_link) < 5 ) ? strtoupper(substr($inst_link,1)) : ucFirst(substr($inst_link,1));
+	$inst_label = ( strlen($inst_label) < 5 ) ? strtoupper(substr($inst_label,1)) : ucFirst(substr($inst_label,1));
 }
 
 // Adding Lib4RI CSS for Icons:
-echo '<link type="text/css" rel="stylesheet" href="' . $inst_link . '/sites/all/themes/libfourri_theme/css/styles.css" />';
+echo '<link type="text/css" rel="stylesheet" href="./sites/all/themes/libfourri_theme/css/styles.css" />';
 ?>
 
 
@@ -44,8 +43,8 @@ echo '<link type="text/css" rel="stylesheet" href="' . $inst_link . '/sites/all/
 <h2>Data export</h2>
 
 <ul>
-	<li><strong>Excel</strong>: <img style="background-size: 20px 18px; padding:18px 20px 0px 0px; position:relative; top:-1px;" src="<?php echo $inst_link; ?>/sites/all/modules/lib4ri_solr_export_extra/images/xls.green.32x32.png?css=dominating" height="18" width="18" class="secondary-display-xls" alt="Excel Icon" /> Export <em>publication medata</em> in Excel format by clicking on the spreadsheet icon on the top right-hand corner of the list</li>
-	<li><strong>CSV</strong>: <img style="background-size: 20px 18px; padding:18px 20px 0px 0px; position:relative; top:-1px; left:2px;" src="<?php echo $inst_link; ?>/sites/all/modules/islandora_solr_search/islandora_solr_config/images/csv.png?css=dominating" height="18" width="18" class="secondary-display-csv" alt="CSV Icon" />&nbsp; Export <em>publication medata</em> in CSV format by clicking on the CSV icon on the top right-hand corner of the list</li>
+	<li><strong>Excel</strong>: <img style="background-size: 22px 20px; padding:20px 22px 0px 0px; position:relative; top:-1px;" src="./sites/all/modules/lib4ri_solr_export_extra/images/xls.green.32x32.png?css=dominating" height="18" width="18" class="secondary-display-xls" alt="Excel Icon" /> Export <em>publication medata</em> in Excel format by clicking on the spreadsheet icon on the top right-hand corner of the list</li>
+	<li><strong>CSV</strong>: <img style="background-size: 22px 20px; padding:20px 22px 0px 0px; position:relative; top:-1px; left:2px;" src="./sites/all/modules/islandora_solr_search/islandora_solr_config/images/csv.png?css=dominating" height="18" width="18" class="secondary-display-csv" alt="CSV Icon" />&nbsp; Export <em>publication medata</em> in CSV format by clicking on the CSV icon on the top right-hand corner of the list</li>
 </ul>
 
 <h2>DORA links</h2>
@@ -56,7 +55,7 @@ echo '<link type="text/css" rel="stylesheet" href="' . $inst_link . '/sites/all/
 	<li>As a member of <?php echo $inst_label; ?>, you can embed links to individual publications:
 	<ul>
 		<li>on your personal homepage via the web interface described <a href="https://www.internal.eawag.ch/de/informatik/datenmanagement/web-content-management/persoenliche-webseite/" target="_blank">here</a></li>
-		<li>on all other external <?php echo $inst_label; ?> webpages via the web interface described in the <a href="https://www.internal.<?php echo $inst_link; ?>.ch/fileadmin/intranet/kommunikation/beratung/web/typo3_handbuch.pdf#page=33">TYPO3 handbook</a> (PDF, p.33)</li>
+		<li>on all other external <?php echo $inst_label; ?> webpages via the web interface described in the <a href="https://www.internal.eawag.ch/fileadmin/intranet/kommunikation/beratung/web/typo3_handbuch.pdf#page=33">TYPO3 handbook</a> (PDF, p.33)</li>
 	</ul>
 	</li>
 	<li>To enhance the visibility of your publications, we strongly recommend using the above interfaces to embed publications</li>
