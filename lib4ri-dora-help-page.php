@@ -13,9 +13,9 @@ echo '<link type="text/css" rel="stylesheet" href="./sites/all/themes/libfourri_
 ?>
 
 
-<h2>Search</h2>
+<h2 style='margin-bottom:0px;'>Search</h2>
 
-<ul>
+<ul style='margin-top:0px;'>
 	<li><strong>Search box: </strong>Use the search box on top of the DORA webpage for a general search in all metadata (use quotes to search for exact phrases)</li>
 	<li><strong>Advanced search: </strong>Use the <a href="./advanced-search">Advanced Search</a> for more options, e.g.:
 	<ul>
@@ -27,9 +27,10 @@ echo '<link type="text/css" rel="stylesheet" href="./sites/all/themes/libfourri_
 	<li><strong>Facet</strong>: Use the facet on the left to filter publications (the facet is visible on the <a href="./islandora/search">Browse</a> page and on any results page)</li>
 </ul>
 
-<h2>Citation export</h2>
 
-<ul>
+<h2 style='margin-bottom:0px;'>Citation export</h2>
+
+<ul style='margin-top:0px;'>
 	<li><strong>RIS, RTF, PDF</strong>: Export <em>all or a selction </em>of citations in RIS, RTF or PDF format with the ‘Export As’ option on top of the result list (the citation style can be changed as soon as the export type is chosen):
 
 	<ul>
@@ -40,16 +41,18 @@ echo '<link type="text/css" rel="stylesheet" href="./sites/all/themes/libfourri_
 	</li>
 </ul>
 
-<h2>Data export</h2>
 
-<ul>
+<h2 style='margin-bottom:0px;'>Data export</h2>
+
+<ul style='margin-top:0px;'>
 	<li><strong>Excel</strong>: <img style="background-size: 22px 20px; padding:20px 22px 0px 0px; position:relative; top:-1px;" src="./sites/all/modules/lib4ri_solr_export_extra/images/xls.green.32x32.png?css=dominating" height="18" width="18" class="secondary-display-xls" alt="Excel Icon" /> Export <em>publication medata</em> in Excel format by clicking on the spreadsheet icon on the top right-hand corner of the list</li>
 	<li><strong>CSV</strong>: <img style="background-size: 22px 20px; padding:20px 22px 0px 0px; position:relative; top:-1px; left:2px;" src="./sites/all/modules/islandora_solr_search/islandora_solr_config/images/csv.png?css=dominating" height="18" width="18" class="secondary-display-csv" alt="CSV Icon" />&nbsp; Export <em>publication medata</em> in CSV format by clicking on the CSV icon on the top right-hand corner of the list</li>
 </ul>
 
-<h2>DORA links</h2>
 
-<ul>
+<h2 style='margin-bottom:0px;'>DORA links</h2>
+
+<ul style='margin-top:0px;'>
 	<li>Use the address in the URL bar of the browser to link to result lists or individual publications in DORA (e.g. on a website)</li>
 <?php if($inst_label == 'Eawag'): ?>
 	<li>As a member of <?php echo $inst_label; ?>, you can embed links to individual publications:
@@ -62,9 +65,10 @@ echo '<link type="text/css" rel="stylesheet" href="./sites/all/themes/libfourri_
 <?php endif; ?>
 </ul>
 
-<h2>Submit your publication</h2>
 
-<ul>
+<h2 style='margin-bottom:0px;'>Submit your publication</h2>
+
+<ul style='margin-top:0px;'>
 	<li>Please submit your publications via our <a href="./submit">online form</a></li>
 	<li>For cases not covered by the form, please send us an <a href="mailto:dora@lib4ri.ch?subject=DORA%20<?php echo $inst_label; ?>%20submission">email</a></li>
 	<li>Our&nbsp;<a href="./dora_content_policy">content policy</a> defines which content is accepted in DORA</li>
