@@ -1,12 +1,11 @@
 <?php
 /*
 	DORA Content Policy - for Drupal
-	v03e / 07-Sep-2018 / by Frank Hoesli / eawag.ch
+	v04b / 08-Jan-2019 / by Frank Hoesli / eawag.ch
 
-	Purpose: Goal of this script here is to extract content of a given html document 
-	here concretely * https://www.dora.lib4ri.ch/eawag/dora_content_policy_data * and
-	to insert it into institute-specific document by relacing placeholders with the
-	institute name which will be detected by the url (or by the 'inst' url argument).
+	Purpose: Goal of this script here is to extract content of a given html document
+	and to insert it into institute-specific document by relacing placeholders with the
+	institute name which will be detected by the Drupal URL (or by the 'inst' url argument).
 
 	There is partially a strong optimization for html files produced with Microsoft Word.
 	When saving better select *filtered* html to reduce MS-Office related code-overhead.
@@ -14,15 +13,15 @@
 	the document_name_FILES folder that is created by MS Word to store document images in.
 
 	Layout/CSS issues between original document and CMS are proprietarily tuned currently.
-
-	A tweak was used to download the PDF - it was added to the CMS as image and not as PDF.
-	Perhaps we should considered once e.g.: https://www.drupal.org/project/download_file
 */
 
 // institute names (assumed to find one in a URL right between 2 slashes):
 $instAry = array( 'eawag' => "Eawag", 'empa' => "Empa", 'psi' => "PSI", 'wsl' => "WSL", 'lib4ri' => "Lib4RI" );
-$_host   = "";		// an institute name where the main document is, will be expanded by $_alias, if empty 1st if $instAry will be taken, partially hard-coded for safety.
-$_alias  = ( @!empty($_GET['alias']) ) ? rawurldecode($_GET['alias']) : "dora_content_policy_data";		// to be attached onto $_host
+
+$_policy_html = "/var/www/html/data/all/2018_04_DORA_Content_Policy_approved_all_Instit.html";		// to be included + shown on the web page
+$_policy_pdf = "/var/www/html/data/all/2018_04_DORA_Content_Policy_approved_all_Instit.pdf";
+$_policy_pdf_name = "DORA_Lib4RI_Content_Policy.pdf";					// optional, only useful if different
+
 $_inst   = ( @!empty($_GET['inst'] ) ) ? rawurldecode($_GET['inst'] ) : "";			// optional, will be auto-detect otherwise
 $_d_css  = ( @!empty($_GET['css']  ) ) ? rawurldecode($_GET['css']  ) : "prop|none|orig";		// the 1st entry will count.
 $_d_img  = ( @!empty($_GET['img']  ) ) ? rawurldecode($_GET['img']  ) : "none";
@@ -35,7 +34,7 @@ if ( !strchr($pdf_link,"?dl=pdf") && !strchr($pdf_link,"&dl=pdf") )
 {
 	$pdf_link = ( strchr(basename($pdf_link),"?") ) ? ( $pdf_link . "&dl=pdf" ) : ( $pdf_link . "?dl=pdf" );
 }
-$pdf_name = "DORA_Lib4RI_Content_Policy.pdf";
+
 
 // institute specific data (to speed up, could also be caught form Drupal code perhaps...)
 $addAry = array();		// this array is not good, just for fast convenience - to be tuned...
@@ -93,10 +92,24 @@ function StrCutFromTo( $str, $cut, $to1, $to2, $afterTo )	// to eliminate a port
 // -------------------------------------------------------------------------------------------
 
 
-// check the alias (to compose the required document link):
-if ( empty($_alias) )
-{
-	echo "<br>ERROR: Document path/alias '$_alias' not $pos!<br>\r\n";
+if ( @strtolower($_GET['dl']) == "pdf" ) {
+	if ( @filesize($_policy_pdf) ) {
+		header('Content-Type: application/pdf');
+		header('Content-Disposition: attachment; filename="' . ( empty($_policy_pdf_name) ? basename($_policy_pdf) : $_policy_pdf_name ) . '"' );
+		readfile( $_policy_pdf );
+	} else {
+		header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+	}
+	exit;
+}
+
+// Check the policy documents:
+if ( @!filesize($_policy_html) ) {
+	echo "<br>ERROR: Policy document as HTML not found!<br>\r\n";
+	exit;		// :=(
+}
+if ( @!filesize($_policy_pdf) ) {
+	echo "<br>ERROR: Policy document as PDF not found!<br>\r\n";
 	exit;		// :=(
 }
 
@@ -112,49 +125,13 @@ if ( empty($_inst) || @!isset($instAry[strtolower($_inst)]) )
 $_inst = strtolower($_inst);		// ensure lowercase!
 
 
-$_doc = ( empty($_host) ) ? strtolower(reset($instAry)) : strtolower($_host);		// temp!
-$_host = "https:/" . strtr( "/www|dora|lib4ri|ch/", "|" , "." );
-$_doc = $_host . $_doc . "/" . $_alias;
 
 $fp1 = NULL;
 
-
-if ( @strtolower($_GET['dl']) == "pdf" )
-{
-	if ( ( $fp1 = @fopen( $_doc, "r" ) ) )
-	{
-		$imgNeedle = "foef:img";		// <img typeof="foaf:Image" src="http://lib-dora-.e...
-		$pdf_src = "";		// it may be that drupal will attach a number onto the filename, but this shouldn't bother...
-		while ( !feof($fp1) )
-		{
-			$row = fgets( $fp1, 65535 );
-			if ( ( $pos = strpos($row,"field-label\">Image:") ) )
-			{
-				$pdf_src = strtok( substr( strchr( strchr( substr($row,$pos+20), "<img "), "src=\"" ), 5 ), "\"" );
-				break;
-			}
-		}
-		fclose( $fp1 );
-
-	//	$pdf_name = ( $_inst == "lib4ri" ) ? "DORA_Lib4RI_Content_Policy.pdf" : ( "DORA_Lib4RI_Content_Policy_" . $instAry[$_inst] . ".pdf" ) ;
-
-		header('Content-Type: application/pdf');
-		header('Content-Disposition: attachment; filename="' . $pdf_name . '"' );
-		readfile( $pdf_src );
-		exit;
-	}
-
-	header('Content-Type: plain/text');
-	echo "<br>ERROR: Requested PDF not found!<br>\r\n";
-	exit;
-}
-
-
-
 // get content out of the given HTML document:
-if ( !( $fp1 = @fopen( $_doc, "r" ) ) )
+if ( !( $fp1 = @fopen( $_policy_html, "r" ) ) )
 {
-	echo "<br>ERROR: Document '$_doc' not $pos!<br>\r\n";
+	echo "<br>ERROR: Policy document could not be opened!<br>\r\n";
 	exit;
 }
 
@@ -163,7 +140,7 @@ $_d_img = rtrim( $_d_img );
 $html_css = "";
 $html_body = "";
 
-$loop_task = 2;
+$loop_task = 3;
 while ( !feof($fp1) )
 {
 	$row = fgets( $fp1, 65535 );
@@ -200,7 +177,15 @@ fclose( $fp1 );
 // should not bother pages converted by other doc-2-html tools, but if needed
 // there is also the generator meta tag that will contain 'Microsoft Word'.
 
-// Problem1: MS Word may put arbitrarly line-breaks (next to existing spaces) 
+// Problem1: speacial windows/Word quotes
+$html_body = rawurlencode($html_body);
+$html_body = str_replace("%E2%80%9C","\"",str_replace("%E2%80%9D","\"",$html_body));		// apostrophic double-quote to normal double-quotes
+$html_body = str_replace("%93","\"",str_replace("%94","\"",$html_body));		// apostrophic double-quote to normal double-quotes
+$html_body = str_replace("%C2%AB","\"",str_replace("%C2%BB","\"",$html_body));		// << and >> to normal double-quotes
+$html_body = str_replace("%AB","\"",str_replace("%BB","\"",$html_body));		// << and >> to normal double-quotes
+$html_body = rawurldecode($html_body);
+
+// Problem2: MS Word may put arbitrarly line-breaks (next to existing spaces) 
 // and also additional line-break-related spaces.
 $html_body = implode( "[R2N)", explode( "\r\n\r\n", $html_body ) );
 $html_body = implode( "[R2N)", explode( "\n\n", $html_body ) );
@@ -221,8 +206,11 @@ $rowAry = explode( "(r1n]", $html_body );
 $html_body = "";	// reset!
 foreach( $rowAry as $row ) { $html_body .= trim($row) . " "; }
 
-// Problem2: pure work-around against MS Word's strange anchor placement - to be tuned...
-if ( @empty($_GET['toc']) ) { $html_body = StrCutFromTo( $html_body, '<a name="_Toc', "</a>", "", 1 ); }
+// Problem3: pure work-around against MS Word's strange anchor placement - to be tuned...
+// if ( @empty($_GET['toc']) ) { $html_body = StrCutFromTo( $html_body, '<a name="_Toc', "</a>", "", 1 ); }
+// too cruel... - revised with as soft tweak:
+$html_body = str_replace( '<a name="_Toc', '<span></span name="_Toc', $html_body );
+
 
 // replace generally:
 if ( !empty($_d_rep) ) { $html_body = str_replace( strtok($_d_rep."|","|"), substr(strchr($_d_rep,"|"),1), $html_body ); }
@@ -273,11 +261,12 @@ if ( substr($_d_css,0,4) != "orig" )
 	$html_body = str_replace( "  ", " ", $html_body );
 }
 
+
 $html_body = str_replace( "<p style='margin-bottom:3.0pt'><span lang=EN-GB>&nbsp;</span></p>", "&nbsp;<br>", $html_body );
 $html_body = str_replace( "&nbsp;&nbsp;&nbsp;", "\t", $html_body );
 
 
-// Problem3: Institute specific tunings, just put here to save time right now - to be tuned...
+// Problem4: Institute specific tunings, just put here to save time right now - to be tuned...
 if ( @isset($addAry['all']) )			// replacement
 {
 	if ( @isset($addAry['all']['foot']) )		// addition (bottom)

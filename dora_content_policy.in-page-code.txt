@@ -1,55 +1,51 @@
 # DORA Content Policy
 
-## The 'DORA Lib4Ri Content Policy' on Dev1:<tt>
-   - http://dev1.example.com/eawag/dora_content_policy
-   - http://dev1.example.com/empa/dora_content_policy
-   - http://dev1.example.com/psi/dora_content_policy
-   - http://dev1.example.com/wsl/dora_content_policy
+## The 'DORA Lib4Ri Content Policy' on Prod1:<tt>
+   - https://www.dora.lib4ri.ch/eawag/dora_content_policy
+   - https://www.dora.lib4ri.ch/empa/dora_content_policy
+   - https://www.dora.lib4ri.ch/psi/dora_content_policy   <== not reachable online (yet)
+   - https://www.dora.lib4ri.ch/wsl/dora_content_policy
+   - https://www.dora.lib4ri.ch/dora_content_policy       <== not reachable online (yet)
 </tt>
-Server location of the (original) Policy document is on Prod1/Eawag, however this document (as HTML) will be used for all 4 institute sub-sites.
-http://prod1.example.com/eawag/dora_content_policy_raw
 
+## Technical background:<tt>
+	The DORA Content Policy is an unique set of rules authoritative
+	for all Lib4RI institutes (Eawag, Empa PSI, WSL).
+	Technical approach is to offer a link to this policy on each
+	sub-site with institute specific naming and references though,
+	but internally/technically using one and the same policy document
+	which is intended to reside on the commonly shared 'data' folder.
+</tt>
 
-## Work steps
+## Work steps:
 * To prepare your policy document:<tt>
-   - MS Word: Open your *.docx + Save it as html/filtered.
-   - Notepad: Copy all the HTML source code from this file.
-   - Drupal : Log in on Prod1 on Eawag.
-   - Drupal : Content - Add content - basic page - text format 'PHP code'.
-   - Drupal : Set any title + Paste HTML code into text/body box.
-   - Drupal : Ensure the alias is 'dora_content_policy_raw' + Publish.
-   - Drupal : Configuration - Performance - Clear all Caches (if not admin)
-   - Online : Test it online (...but so far not on Prod1 yet).
-		- http://prod1.example.com/eawag/dora_content_policy
-		- http://prod1.example.com/empa/dora_content_policy
-		- http://prod1.example.com/wsl/dora_content_policy
-		( http://prod1.example.com/psi/dora_content_policy )
+	- MS Word: Open the policy document in Word.
+	- Save it as 'filtered' HTML in \\eaw-projects\Lib4RI_DORA_archive$\all\
+	- Also save there the policy document as PDF.
 </tt>
-* To create the Durpal node/page.<tt>
-   - Rename your PDF by attaching "_as.png" onto the PDF file name to
-     pretend an image, example: Lib4RI-2018.pdf => Lib4RI-2018.pdf_as.png
-   - In Drupal: 'Add content', select 'Image Block', press the 'Browse' button
-     to select your renamed PDF/Png, do NOT press 'upload' (just showing the
-     file name inside the selection field will be sufficient).
-   - Copy the image link or add content/code in the text area.
-   - Press 'Save' on the button of the page.
+* To create the content node/page in the Drupal CMS.<tt>
+	- Select 'Add content', select 'Basic Page'
+	- Select 'PHP edit mode' + copy the PHP-code into the textarea.
+	- Optionally show a menu link as wanted
+	- Assign the alias dora_content_policy (required).
+	- Redo these Drupal steps for all sub-sites.
 </tt>
 
-
-## Issues:<tt>
-   - Edit+Save will not work unless you remove the PDF/Png file and readd it again (just press 'remove', then 'browse', but not 'upload').
-   - Layout: The style of the original policy document may not really be
-     in sync with the style of the Drupal website, you can try it out:
-      - Original document CSS widely removed (default):
-        http://dev1.example.com/eawag/dora_content_policy?css=none
-      - Original document CSS widely maintained:
-        http://dev1.example.com/eawag/dora_content_policy?css=orig
-      - Proprietary CSS tuning:
-        http://dev1.example.com/eawag/dora_content_policy?css=prop
-   - Online access to the original 'raw' policy: The stored policy on
-     the Prod1 server has to be *published* in Drupal. Although there
-     is no link obvious, it can be accessed if you know where:
-     http://prod1.example.com/eawag/dora_content_policy_raw
+## Issues/Hints:<tt>
+	- Currently there is not auto-detection of the newest policy document
+	  in the commonly shared 'data' folder, and you have to update information
+	  of the file names on top of the PHP in-page code.
+	- MS Word may add many unneeded/useless formatting which can disturb
+	  the parsing the HTML file. A short recheck of the produced HTML file
+	  is recommended.
+	- Layout: The style of the original policy document may not really be in
+	  sync with the style of the Drupal website, as test you can try it out:
+		- Original document CSS widely removed (default):
+		  http://www.dora-dev.lib4ri.ch/eawag/dora_content_policy?css=none
+		- Original document CSS widely maintained:
+		  http://www.dora-dev.lib4ri.ch/eawag/dora_content_policy?css=orig
+		- Proprietary CSS tuning:
+		  http://www.dora-dev.lib4ri.ch/eawag/dora_content_policy?css=prop
 </tt>
 
 
