@@ -1,0 +1,6 @@
+
+
+	To be set up in https://www.dora.lib4ri.ch/<INSTITUTE>/node/add/page
+	Intended to work on all SUB-sites
+	Text format: 'PHP Code'
+	

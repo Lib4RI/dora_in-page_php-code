@@ -1,0 +1,7 @@
+
+
+	To be set up in https://www.dora.lib4ri.ch/admin/structure/block
+	Text format: 'PHP Code'
+
+	Block area : 'Welcome' or 'Content' (depends on which sidebars you want to hide)
+
