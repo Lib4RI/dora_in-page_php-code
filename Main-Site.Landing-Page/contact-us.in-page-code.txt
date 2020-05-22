@@ -2,3 +2,5 @@
 
 	To be set up in https://www.dora.lib4ri.ch/node/add/page
 	Text format: 'PHP Code'
+	URL alias  : 'make-contact'
+

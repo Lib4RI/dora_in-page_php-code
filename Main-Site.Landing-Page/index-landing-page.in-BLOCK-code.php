@@ -65,5 +65,5 @@
 
 <script type='text/javascript'><!--
 	if ( pMain = document.getElementById('main') ) { pMain.setAttribute('style','background-color:#5d5d5d;'); }
-	setTimeout(function(){ if ( window.innerWidth < 750 ) { document.body.style.width = '750px'; } }, 150);
+	// setTimeout(function(){ if ( window.innerWidth < 750 ) { document.body.style.width = '750px'; } }, 150);
 //--></script>
