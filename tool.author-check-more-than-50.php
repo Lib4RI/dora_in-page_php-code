@@ -81,8 +81,8 @@ foreach( $overAry as $autAry ) {
 	$html .= "- <a href='{$link}' target='_blank'>{$pid}</a> &nbsp; (" . $aNum . " authors)<br>";
 }
 if ( $pNum ) {
-	$html .= "<br><b>Please note</b>: A re-check of affiliations is not yet implemented, so this list\r\n";
-	$html .= "may also contain publications with more than {$ignLimit} affiliated authors.\r\n";
+	$html .= "<br><b>Please note</b>: A re-check of affiliations is not yet implemented, so this list may also\r\n";
+	$html .= "contain publications with more than {$ignLimit} <i>affiliated</i> authors (who must be listed all).\r\n";
 }
 echo $html . "<br>";
 
