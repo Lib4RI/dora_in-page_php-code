@@ -1,6 +1,6 @@
 </div></div></div><!-- required for wide-screens --><div><div><div>
 
-<div style='background-color:#5d5d5d; position:relative; top:-30px;'>&nbsp;
+<div style='background-color:#5d5d5d; position:relative; top:-36px;'>&nbsp;<br>
 
 <table border='0' cellpadding='15' style='background-color:#5c5b5a;'>
 	<tr style='background-color:#022640;'>
@@ -65,5 +65,5 @@
 
 <script type='text/javascript'><!--
 	if ( pMain = document.getElementById('main') ) { pMain.setAttribute('style','background-color:#5d5d5d;'); }
-	// setTimeout(function(){ if ( window.innerWidth < 750 ) { document.body.style.width = '750px'; } }, 150);
+	if ( window.innerWidth < 750 ) { document.body.style.width = '750px'; }
 //--></script>
