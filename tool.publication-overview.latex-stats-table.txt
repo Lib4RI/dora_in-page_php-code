@@ -1,0 +1,12 @@
+
+
+	To be set up in https://www.dora.lib4ri.ch/node/add/page
+	Text format: 'PHP Code'
+	URL alias  : ---
+	Published  : No
+
+	This is intended to create the LaTeX code for a table
+	showing the current publications stats in DORA, usually
+	used to update presentation sheets for the LaTeX course.
+
+

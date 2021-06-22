@@ -20,8 +20,19 @@
 $site_name = variable_get('site_name', 'DORA Lib4RI'); // @CAVEAT: if the subsequent logic fails, people will be referred to as "Lib4RI-affiliated"!
 $institute = preg_replace("/^DORA */", "", $site_name); // assumes $site_name = "DORA <institute>"
 
-$page_title = preg_replace("/Lib4RI/", $institute, "Browse by Lib4RI-affiliated authors");
+if ( stripos($institute,'4RI') !== false ) {
+  if ( !user_is_logged_in() && strpos($_SERVER['HTTP_HOST'],'-prod') ) {
+    echo '<br>Empty by intention. Try to log in.<br><br>';
+    return;  // rather a reminder, should not be available anyway
+  }
+  $institute = 'Lib4RI'; // override for main-sites where we just may have '4RI'
+}
+
+$page_title = str_replace("Lib4RI", $institute, "Browse Publications by Lib4RI-Affiliated Authors");
 drupal_set_title($page_title);
+if ( !user_is_logged_in() ) {
+  echo '<br>';  // not needed if a user is logged in (user would get then action tabs, introducing sufficient vertical spacing)
+}
 
 // Set the namespace of the objects we want to list
 // N.B.: we assume all authors are in the namespace '<subsite>-authors', where <subsite> is the name of the subsite as written in the url
