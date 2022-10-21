@@ -1,0 +1,61 @@
+
+General:
+
+	DORA Open Access SlideShow with "Responsive Carousel"
+		https://monsterspost.com/coding-responsive-horizontal-posts-slider-using-css3-jquery/
+		https://github.com/basilio/responsiveCarousel
+	Lib4RI's implementation:
+		https://github.com/Lib4RI/dora_in-page_php-code/blob/master/dora_slideshow_carousell.in-page-code.block.php
+
+
+Drupal setup:
+
+	To be set e.g. on https://www.dora.lib4ri.ch/psi/admin/structure/block ==> "Add block"
+	Text format: 'PHP Code'
+
+
+Publication (PID) selection:
+	Currently the PIDs of DORA's publication are picked from this file:
+		\\eaw-archives\Lib4RI_DORA_archive$\all\WIKI.Publications+for+HomePage.txt
+	This is a simple copy+paste version from the Wiki:
+		https://www.wiki.lib4ri.ch/display/TD/Publications+for+HomePage
+	The parsing script (dora_slideshow_carousell.in-page-code.block.php) will ignore rows
+	in that file beginning with a '#', also a single PID can be skipped with a leading '#'.
+	An example of the parsed file you may find in this repository:
+		dora_slideshow_carousell.in-page-code.WIKI.Publications+for+HomePage.txt
+
+
+Special notes:
+
+	"Responsive Carousel" installation/integration:
+		The "responsiveCarousel.min.js" is assumed to be stored/accessible:
+			/var/www/html/data/all/js/responsiveCarousel.min.js
+			https://www.dora.lib4ri.ch/eawag/data/all/js/responsiveCarousel.min.js
+		Same for 'jquery-1.11.0.min.js' if not already part of the web site.
+
+
+	To configure "Show block on specific pages":
+		You may select "Should you select" and use restrictive PHP code (example):
+			<?php
+			if ( time() < 1666584000 && !user_is_logged_in() /* internal till Oct-24 04:00Z */ ) { return false; }
+			$req = rtrim(strtok(strtr($_SERVER['REQUEST_URI'],'#','?').'?','?'),'/');
+			global $base_path; // will be e.g. "/psi/" or just a slash on the main-site
+			$path = substr($req,strpos($req,$base_path)+strlen($base_path));
+			return ( empty($path) || $path == 'front' );
+			?>
+
+
+	Caching with Crontab
+		It's optional and happens by calling the page with the block in special manner.
+		If you intend to do so, you will need to setup a 'cache PIN':
+			sudo drush -r /var/www/html -y @sites php-eval 'variable_set("dora_slideshow_cache_pin",12345678)'
+		For Crontab some syntax as follows is recommended:
+			# DORA Open Access Slideshow, Recreation of Cache (with rotating HTML structure):
+			35 6-22/5 * * 1-5 wget -q -b -t 1 --delete-after -U "Mozilla/5.0 (Lib4ri/OA-SlideShow-Caching)" "http://lib-dora-prod1.emp-eaw.ch/eawag/?cache=-12345678" > /dev/null 2>&1
+			40 6-22/5 * * 1-5 wget -q -b -t 1 --delete-after -U "Mozilla/5.0 (Lib4ri/OA-SlideShow-Caching)" "http://lib-dora-prod1.emp-eaw.ch/empa/?cache=-12345678" > /dev/null 2>&1
+			45 6-22/5 * * 1-5 wget -q -b -t 1 --delete-after -U "Mozilla/5.0 (Lib4ri/OA-SlideShow-Caching)" "http://lib-dora-prod1.emp-eaw.ch/psi/?cache=-12345678" > /dev/null 2>&1
+			50 6-22/5 * * 1-5 wget -q -b -t 1 --delete-after -U "Mozilla/5.0 (Lib4ri/OA-SlideShow-Caching)" "http://lib-dora-prod1.emp-eaw.ch/wsl/?cache=-12345678" > /dev/null 2>&1
+
+
+
+

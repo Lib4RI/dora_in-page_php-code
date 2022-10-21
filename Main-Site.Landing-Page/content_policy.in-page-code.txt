@@ -8,8 +8,11 @@
 	Special notes:
 
 	This page is optimized for the main-site and PSI ('green remarks').
-	The general one is here: https://github.com/Lib4RI/dora_in-page_php-code/blob/master/dora_content_policy.in-page-code.php
+	The general version is here:
+		https://github.com/Lib4RI/dora_in-page_php-code/blob/master/dora_content_policy.in-page-code.php
+	Please check the remarks on the top of the PHP file for further configuration notes.
 
-	Please check the remarks on the top of the PHP file for further configuration notes
+	Current network location for the files of the policy:
+		\\eaw-archives\Lib4RI_DORA_archive$\all
 
-	Current network location for the files of the policy: \\eaw-projects\Lib4RI_DORA_archive$\all
+

@@ -1,9 +1,9 @@
 <b><h4>Non-public auxiliary page to list or delete Bot Logs created by the 'Citation Counts' block of the 'Detailed Record' web page.</h4></b>
 
-<!--break--><!--- Bot log File Listing/Deletion --><!--- Drupal alias: web-citcount-bot-log --><pre><?php
+<!--break--><!--- Bot log File Listing/Deletion --><!--- Drupal alias: web-citcount-bot-log --><pre style="font-size:larger;"><?php
 
 $ipLong = ip2long( strtok($_SERVER['HTTP_X_FORWARDED_FOR'].",",",") );
-$is_lib4ri_user = ( !user_is_anonymous() && ( ( $_SERVER['HTTP_HOST'] == "localhost" ) || 
+$is_lib4ri_user = ( user_is_logged_in() && ( ( $_SERVER['HTTP_HOST'] == "localhost" ) || 
 		( /* Eawag+Empa */ $ipLong >= ip2long("152.88.0.0") && $ipLong <= ip2long("152.88.255.255") ) || 
 			( /* WSL */ $ipLong >= ip2long("193.134.200.0") && $ipLong <= ip2long("193.134.207.255") ) || 
 				( /* PSI */ $ipLong >= ip2long("192.33.118.0") && $ipLong <= ip2long("192.33.127.255") ) ) );
@@ -11,11 +11,11 @@ $is_lib4ri_user = ( !user_is_anonymous() && ( ( $_SERVER['HTTP_HOST'] == "localh
 date_default_timezone_set('CET');
 $timeNow = time();
 $dirAry = array();
-if ( $is_lib4ri_user ) { $dirAry = array("default", "Eawag", "Empa", "PSI", "WSL" ); }
+if ( $is_lib4ri_user ) { $dirAry = array("Eawag", "Empa", "PSI", "WSL", "default" ); }
 
-
-echo "Server <a href='https://www.dora-dev.lib4ri.ch/eawag/web-citcount-bot-log'><b>Dev1</b></a> should not be vistied by bots at all, hence no log files there - hopefully. ";
-echo "But on <a href='https://www.dora.lib4ri.ch/eawag/web-citcount-bot-log'><b>Prod1</b></a> there should be log files listed here, one per public sub-site.\r\n";
+$isProd = ( stripos($_SERVER['HTTP_HOST'],'prod') !== false );
+echo "Server <a href='https://www.dora-dev.lib4ri.ch/web-citedby-bot-log'><b>Dev1</b></a> should not be vistied by bots at all, so no (real) log files " . ( $isProd ? 't' : '' ) . "here. ";
+echo ( $isProd ? 'Here on' : 'On' ) . " <a href='https://www.dora.lib4ri.ch/web-citedby-bot-log'><b>Prod1</b></a> however there should be log files listed, one per public sub-site.\r\n";
 
 $lifeTime = ( @!isset($_GET['lifeTime']) ) ? -1 : (intval($_GET['lifeTime']) * 3600);
 $refTime = ( @!isset($_GET['refTime']) ) ? 0 : intval($_GET['refTime']);
@@ -43,7 +43,7 @@ if ( @!empty($_GET['sortLog']) && ( $logAry = file( "/var/www/html/sites/".strto
 	}
 	array_multisort($count, SORT_DESC, $bot, SORT_ASC, $uaAry);
 	
-	echo "</pre>\r\n<pre style='white-space:nowrap'>Bot frequency on <b>" . strtok(rawurldecode($_GET['sortLog']),":") . "</b> since " . strtok($dateStart," ") . ":</b><br>\r\n";
+	echo "</pre>\r\n<pre style='font-size:larger; white-space:nowrap;'>Bot frequency on <b>" . strtok(rawurldecode($_GET['sortLog']),":") . "</b> since " . strtok($dateStart," ") . ":</b><br>\r\n";
 	foreach( $uaAry as $ary ) {
 		$d = round( 1000 * doubleval($ary[1]) / $total ) / 10.0;
 		$p = ( doubleval(intval($d)) == $d ) ? "{$d}.0%" : "{$d}%";
@@ -56,10 +56,13 @@ if ( @!empty($_GET['sortLog']) && ( $logAry = file( "/var/www/html/sites/".strto
 	unset( $dirAry );		// just to stop here
 }
 
+/*
 if ( sizeof($dirAry) ) {
 	echo "How to delete these logs: Appending <i>?refTime=1544447777</i> onto the current page link would instantly delete all log files older than this timestamp.</br>";
-	echo "The current timestamp is " . $timeNow . ", for yesterday it is " . strval( $timeNow - 86400 ) . " (-24h), or&nbsp;simply select any pleasant timestamp from the list below.<br>\r\n\r\n";
+	echo "The current timestamp is " . $timeNow . ", for yesterday it is " . strval( $timeNow - 86400 ) . " (-24h), or&nbsp;simply select any pleasant timestamp from the list below.";
 }
+*/
+echo "<br>\r\n";
 
 foreach( $dirAry as $site )
 {
@@ -70,13 +73,14 @@ foreach( $dirAry as $site )
 
 	$scanAry = scandir($logDir, 1);
 
-	echo "<b>" . ( ( $site == "default" ) ? "Lib4RI main Site" : ucFirst($site) ) . "</b>:<br>\r\n";
+	echo "<b>" . ( ( $site == "default" ) ? "Lib4RI main Site" : ucFirst($site) ) . "</b>:\r\n";
 	foreach( $scanAry as $item ) {
 		if ( is_file($logDir.$item) && /* substr($item,0,12) == "cit-count.bot.log" && substr($item,-4) == ".csv" */ $item == "cit-count.bot.log" )
 		{
 			$timeFile = filemtime($logDir.$item);
 			$timeStamp = $timeFile;				// = intval( substr($item,11,-4) );
 			$style = "";
+			/*
 			if ( $lifeTime >= 0 ) {
 				if ( ( $timeNow - $timeStamp ) >= $lifeTime ) {
 					unlink($logDir.$item);
@@ -93,12 +97,12 @@ foreach( $dirAry as $site )
 					$style = "text-decoration: line-through";
 				}
 			}
-	//		$t_d = ( $timeFile - $timeStamp );
-			echo "&nbsp; <a style='{$style}' href=\"" . $url . $item . "\">" . str_pad($item,20) . "</a>";
-			echo " &nbsp; <i>" . ( empty($style) ? "[<a href='?sortLog=".$site.":".rawurlencode($item)."'>sort</a>]" : "<b>deleted</b>" ) . "</i> &nbsp; ";
-	//		echo " &nbsp; <i>" . $timeStamp . " " . ( ( $t_d == 0 ) ? "&plusmn;" : ( ( $t_d > 0 ) ? "<b>+" : "<b>" ) ) . $t_d . ( ( $t_d == 0 ) ? "" : "</b>" ) . "</i>";
-			echo " &nbsp; <i class='perm'>" . @str_pad(substr(sprintf('%o',fileperms($logDir.$item)),-4),4,"0",STR_PAD_LEFT);
-			echo " &nbsp; " . @str_pad( strval( filesize($logDir.$item) ),10," ",STR_PAD_LEFT) . " &nbsp; " . @date("Y-m-d H:i:s",$timeFile) . " &nbsp; " . $timeFile . "</i>\r\n";
+			*/
+			echo "&nbsp; <a href='?sortLog=".$site.":".rawurlencode($item)."'>&raquo;<b>Sort Bots</b>&laquo;</a>";
+			echo " in <a href=\"" . $url . $item . "\">" . $item . "</a> (";
+			echo strval((filesize($logDir.$item)+512)>>10) ."kB, " . date("Y-m-d H:i:s",$timeFile);
+		//	echo ", " . substr(sprintf('%o',fileperms($logDir.$item)),-4);
+			echo ")";
 		}
 	}
 	echo "<br>\r\n";
