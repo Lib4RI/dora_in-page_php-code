@@ -1,6 +1,6 @@
 <?php
 
-$alias = 'department-publication';	// to redirect to
+$alias = 'units';	// target alias to redirect to, set old name as current alias (of this Drupal page/node)
 
 $url = url('/'.$alias,array('absolute' => true));
 global $user;
