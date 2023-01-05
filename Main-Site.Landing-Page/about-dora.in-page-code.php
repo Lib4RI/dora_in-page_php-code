@@ -70,6 +70,24 @@ $tableViewsDLs = array(
 		'_sum' => array( 'link' => '', 'result' => -1, 'query' => '' ),
 		'_PSI' => array( 'link' => '', 'result' => 35709, 'query' => '' ),
 	),
+	'row_view_22' => array(
+			'Views in 2022',
+		'Eawag' => array( 'link' => '', 'result' => 474832, 'query' => '' ),
+		'Empa' => array( 'link' => '', 'result' => 436215, 'query' => '' ),
+		'PSI'  => array( 'link' => '', 'result' => 531576, 'query' => '' ),
+		'WSL'  => array( 'link' => '', 'result' => 699558, 'query' => '' ),
+		'_sum' => array( 'link' => '', 'result' => -1, 'query' => '' ),
+		'_PSI' => array( 'link' => '', 'result' => 67405, 'query' => '' ),
+	),
+	'row_dl_22' => array(
+			'<!-- no top line -->Downloads in 2022',
+		'Eawag' => array( 'link' => '', 'result' => 295462, 'query' => '' ),
+		'Empa' => array( 'link' => '', 'result' => 275650, 'query' => '' ),
+		'PSI'  => array( 'link' => '', 'result' => 340854, 'query' => '' ),
+		'WSL'  => array( 'link' => '', 'result' => 430412, 'query' => '' ),
+		'_sum' => array( 'link' => '', 'result' => -1, 'query' => '' ),
+		'_PSI' => array( 'link' => '', 'result' => 47132, 'query' => '' ),
+	),
 	/*
 		VIEW NUMBERS VIA REPORTS FROM ISLANDORA USAGE STATS:
 	https://www.dora.lib4ri.ch/eawag/admin/reports/lib4ri_view_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2021&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2021&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
@@ -294,6 +312,11 @@ $linkJA22 = 'https://www.' . $host . '/@inst/islandora/search/?f[0]=mods_originI
 $linkJA22oa = 'https://www.' . $host . '/@inst/islandora/search/?f[0]=mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2022-01-01T00%3A00%3A00Z%20TO%202022-12-31T23%3A59%3A59Z]&f[1]=mods_genre_ms%3A%22Journal%20Article%22&f[2]=RELS_EXT_fullText_literal_ms:Open%5C%20Access';
 $linkJA22emb = 'https://www.' . $host . '/@inst/islandora/search/?f[0]=mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2022-01-01T00%3A00%3A00Z%20TO%202022-12-31T23%3A59%3A59Z]&f[1]=mods_genre_ms%3A%22Journal%20Article%22&f[2]=RELS_EXT_fullText_literal_ms:Restricted%5C%20%5C%28Embargo%5C%29';
 $linkJA22res = 'https://www.' . $host . '/@inst/islandora/search/?f[0]=mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2022-01-01T00%3A00%3A00Z%20TO%202022-12-31T23%3A59%3A59Z]&f[1]=mods_genre_ms%3A%22Journal%20Article%22&f[2]=RELS_EXT_fullText_literal_ms:Restricted%20OR%20RELS_EXT_fullText_literal_ms:No%5C%20Full%5C%20Text';
+
+$linkJA23 = 'https://www.' . $host . '/@inst/islandora/search/?f[0]=mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00%3A00%3A00Z%20TO%202023-12-31T23%3A59%3A59Z]&f[1]=mods_genre_ms%3A%22Journal%20Article%22';
+$linkJA23oa = 'https://www.' . $host . '/@inst/islandora/search/?f[0]=mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00%3A00%3A00Z%20TO%202023-12-31T23%3A59%3A59Z]&f[1]=mods_genre_ms%3A%22Journal%20Article%22&f[2]=RELS_EXT_fullText_literal_ms:Open%5C%20Access';
+$linkJA23emb = 'https://www.' . $host . '/@inst/islandora/search/?f[0]=mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00%3A00%3A00Z%20TO%202023-12-31T23%3A59%3A59Z]&f[1]=mods_genre_ms%3A%22Journal%20Article%22&f[2]=RELS_EXT_fullText_literal_ms:Restricted%5C%20%5C%28Embargo%5C%29';
+$linkJA23res = 'https://www.' . $host . '/@inst/islandora/search/?f[0]=mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00%3A00%3A00Z%20TO%202023-12-31T23%3A59%3A59Z]&f[1]=mods_genre_ms%3A%22Journal%20Article%22&f[2]=RELS_EXT_fullText_literal_ms:Restricted%20OR%20RELS_EXT_fullText_literal_ms:No%5C%20Full%5C%20Text';
 
 // table structure as array, row-wise:
 $tableSearchLinks = array(
@@ -527,6 +550,61 @@ $tableSearchLinks = array(
 		),
 		'100%' => 'row_pub_ja22',
 	),
+	'row_pub_ja23' => array(
+			'Journal Articles in 2023',
+		'Eawag' => array( 'link' => $linkJA23, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'Empa' => array( 'link' => $linkJA23, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'PSI'  => array( 'link' => $linkJA23 . '&f[7]=RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Apublications', 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_isMemberOfCollection_uri_ms:%22info%5C%3Afedora%5C%2Fpsi%5C%3Apublications%22 AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'WSL'  => array( 'link' => $linkJA23, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'_sum'  => array( 'link' => '', 'result' => -1, 'query' => '' ),
+		'_PSI' => array(
+			'link' => $linkJA23 . '&f[7]=RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Aexternal',
+			'result' => -1,
+			'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Aexternal AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]',
+		),
+	),
+	'row_pub_ja23oa' => array(
+			'<!-- no top line -->&nbsp; &nbsp; Open Access',
+		'Eawag' => array( 'link' => $linkJA23oa, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_fullText_literal_ms:Open%5c%20Access AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'Empa' => array( 'link' => $linkJA23oa, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_fullText_literal_ms:Open%5c%20Access AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'PSI'  => array( 'link' => $linkJA23oa . '&f[7]=RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Apublications', 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_isMemberOfCollection_uri_ms:%22info%5C%3Afedora%5C%2Fpsi%5C%3Apublications%22 AND RELS_EXT_fullText_literal_ms:Open%5c%20Access AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'WSL'  => array( 'link' => $linkJA23oa, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_fullText_literal_ms:Open%5c%20Access AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'_sum'  => array( 'link' => '', 'result' => -1, 'query' => '' ),
+		'_PSI' => array(
+			'link' => $linkJA23oa . '&f[7]=RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Aexternal',
+			'result' => -1,
+			'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Aexternal AND RELS_EXT_fullText_literal_ms:Open%5c%20Access AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]',
+		),
+		'100%' => 'row_pub_ja23',
+	),
+	'row_pub_ja23emb' => array(
+			'<!-- no top line -->&nbsp; &nbsp; With embargo',
+		'Eawag' => array( 'link' => $linkJA23emb, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_fullText_literal_ms:Restricted%5c%20%5c%28Embargo%5c%29 AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'Empa' => array( 'link' => $linkJA23emb, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_fullText_literal_ms:Restricted%5c%20%5c%28Embargo%5c%29 AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'PSI'  => array( 'link' => $linkJA23emb . '&f[7]=RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Apublications', 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_isMemberOfCollection_uri_ms:%22info%5C%3Afedora%5C%2Fpsi%5C%3Apublications%22 AND RELS_EXT_fullText_literal_ms:Restricted%5c%20%5c%28Embargo%5c%29 AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'WSL'  => array( 'link' => $linkJA23emb, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_fullText_literal_ms:Restricted%5c%20%5c%28Embargo%5c%29 AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'_sum'  => array( 'link' => '', 'result' => -1, 'query' => '' ),
+		'_PSI' => array(
+			'link' => $linkJA23emb . '&f[7]=RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Aexternal',
+			'result' => -1,
+			'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Aexternal AND RELS_EXT_fullText_literal_ms:Restricted%5c%20%5c%28Embargo%5c%29 AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]',
+		),
+		'100%' => 'row_pub_ja23',
+	),
+	'row_pub_ja23res' => array(
+			'<!-- no top line -->&nbsp; &nbsp; Restricted',
+		'Eawag' => array( 'link' => $linkJA23res, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND (RELS_EXT_fullText_literal_ms:Restricted OR RELS_EXT_fullText_literal_ms:No%5c%20Full%5c%20Text) AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'Empa' => array( 'link' => $linkJA23res, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND (RELS_EXT_fullText_literal_ms:Restricted OR RELS_EXT_fullText_literal_ms:No%5c%20Full%5c%20Text) AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'PSI'  => array( 'link' => $linkJA23res . '&f[7]=RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Apublications', 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_isMemberOfCollection_uri_ms:%22info%5C%3Afedora%5C%2Fpsi%5C%3Apublications%22 AND (RELS_EXT_fullText_literal_ms:Restricted OR RELS_EXT_fullText_literal_ms:No%5c%20Full%5c%20Text) AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'WSL'  => array( 'link' => $linkJA23res, 'result' => -1, 'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND (RELS_EXT_fullText_literal_ms:Restricted OR RELS_EXT_fullText_literal_ms:No%5c%20Full%5c%20Text) AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]' ),
+		'_sum'  => array( 'link' => '', 'result' => -1, 'query' => '' ),
+		'_PSI' => array(
+			'link' => $linkJA23res . '&f[7]=RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Aexternal',
+			'result' => -1,
+			'query' => $queryPid . ' AND mods_genre_ms:Journal%5c%20Article AND RELS_EXT_isMemberOfCollection_uri_ms:*%5C%3Aexternal AND (RELS_EXT_fullText_literal_ms:Restricted OR RELS_EXT_fullText_literal_ms:No%5c%20Full%5c%20Text) AND mods_originInfo_encoding_w3cdtf_keyDate_yes_dateIssued_dt:[2023-01-01T00:00:00Z TO 2023-12-31T23:59:59Z]',
+		),
+		'100%' => 'row_pub_ja23',
+	),
 );
 
 $tableAry = array_merge( $tableSearchLinks, $tableViewsDLs );
@@ -540,6 +618,13 @@ $userRoles = array_values($user->roles);
 if ( in_array('administrator',$userRoles) || in_array('repo manager',$userRoles) || in_array('editor',$userRoles) ) {
 	$cacheLifeTime = 5;		// over-ride: accepting (almost) no caching duration for some roles
 }
+
+/*
+/var/www/html/sites/default/files/dora-page.about-stats/lib4ri.about-stats.cache.2022-11-20.json
+https://www.dora.lib4ri.ch/files
+https://www.dora.lib4ri.ch/sites/default/files/dora-page.about-stats/lib4ri.about-stats.cache.2022-11-20.json
+
+*/
 
 $cacheDir = $_SERVER['DOCUMENT_ROOT'] . '/sites/' . ( empty($_inst) ? 'default' : $_inst ) . '/files/dora-page.about-stats/';
 if ( @!is_dir($cacheDir) ) { mkdir($cacheDir); }
@@ -576,9 +661,21 @@ if ( $readFromCache && $_delay < 1 && $cacheAge <= $cacheLifeTime ) {
 	if ( $jsAnimated && @in_array('administrator',array_values($user->roles)) ) {
 		$jsAnimated = false;
 	}
+	/*
+	foreach( $tableAry as $rowIdx => $rowAry ) {
+		if ( !user_is_logged_in() ) {
+			if ( substr($rowIdx,0,12) == 'row_pub_ja20' ) { unset($tableAry[$rowIdx]); }
+		}
+	}
+	*/
 } else { // search Solr for result numbers (and sum them up):
 	foreach( $tableAry as $rowIdx => $rowAry ) {
 		if ( substr($rowIdx,0,1) == '_' ) { continue; }
+	/*
+		if ( !user_is_logged_in() ) {
+			if ( substr($rowIdx,0,12) == 'row_pub_ja20' ) { continue; }
+		}
+	*/
 		$sumRow = 0;
 		foreach( $rowAry as $cellIdx => $cellData ) {
 			if ( is_array($cellData) ) {
@@ -662,6 +759,9 @@ $delayCount = 0; // optional
 echo "<table id='{$tableTheme}' style='position:relative; top:-1em;' cellpadding='5' >\r\n";
 foreach( $tableAry as $rowIdx => $rowAry ) {
 	if ( substr($rowIdx,0,1) == '_' ) { continue; }
+	if ( !user_is_logged_in() ) {
+		if ( substr($rowIdx,0,12) == 'row_pub_ja20' ) { continue; }
+	}
 	$cellData = reset($rowAry);
 	echo ( !is_string($cellData) || stripos($cellData,'<!-- no top line -->') !== false ) ? "<tr>\r\n" : "<tr class='trMain'>\r\n";
 	$delayCount++; // optional
