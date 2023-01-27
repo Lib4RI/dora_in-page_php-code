@@ -1,0 +1,24 @@
+
+Description:
+	Will export all the e-mail addresses of new employees
+	who joined Eawag/Empa/PSI/WSL during the last month,
+	currently from the 10th (default, as requested).
+	
+
+Requested by:
+	Stephanie Hofmann (approved during Jour Fixe DORA)
+	
+
+Drupal setup:
+	To be set up in https://www.dora.lib4ri.ch/node/add/page
+	Text format: 'PHP Code'
+	URL alias  : 'mail-delta'
+	Must be 'published' (there is an internal restriction to
+	grant access also for Stephanie + Bobby next to admins).
+	
+
+Drupal dependancy:
+	lib4ri_author_update module
+	
+
+
