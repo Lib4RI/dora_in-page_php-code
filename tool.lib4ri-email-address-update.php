@@ -154,7 +154,8 @@ foreach( $instAry as $inst ) {
 		if ( @isset($mailAry['from'][$eMail]) ) { continue; }
 		/* DEV */ if ( @empty(!$_GET['dev']) ) { echo "<br><pre>" . print_r( $userData, 1 ) . "</pre><br>"; }
 		$userData = array_map($workAry[$inst]['transform'],$userData);
-		$addrAry[] = $userData['FIRSTNAME'] . ' ' . $userData['LASTNAME'] .' <' . $userData[$mailIndex] . '>';
+	//	$addrAry[] = rawurlencode($userData['FIRSTNAME'] . ' ' . $userData['LASTNAME'] . ' ') . '<' . $userData[$mailIndex] . '>';
+		$addrAry[] = $userData[$mailIndex];
 	}
 	$addrTotal = sizeof($addrAry);
 
@@ -179,8 +180,9 @@ foreach( $instAry as $inst ) {
 		$ary = array_slice($addrAry,$b*$numPerBatch,$numPerBatch);
 		$idx = ($b+1) . '/' . $numBatches;
 		echo ( $numBatches == 1 ) ? '<br>' : ('Batch ' . ($b+1) . '/' . $numBatches . ':<br>');
-		echo '<a href="mailto:?bcc=' . implode(';',$ary) . '?subject=' . $mailTitle . $instName . '">';
-		echo implode('; ',array_map('rtrim',array_map('strip_tags',$ary))) . '</a><br>';
+		echo '<a href="mailto:?bcc=' . implode(';',$ary) . '&subject=' . $mailTitle . $instName . '">';
+	//	echo htmlentities(implode('; ',array_map('rtrim',array_map('urldecode',array_map('strip_tags',$ary))))) . '</a><br>';
+		echo implode('; ',$ary) . '</a><br>';
 	}
 	echo '</ul><br>';
 }
