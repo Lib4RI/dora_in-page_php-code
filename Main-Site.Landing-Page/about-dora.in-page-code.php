@@ -1,6 +1,6 @@
 <p>
  <a href='/' target='_blank'>DORA</a> is the institutional repository and bibliography for all research articles and other publications affiliated 
-with the four research institutes within the ETH Domain (<a href='https://www.eawag.ch/' target='_blank'>Eawag</a>, <a href='https://www.empa.ch/' target='_blank'>Empa</a>, <a href='https://www.wsl.ch/' target='_blank'>WSL</a> and <a href='https://www.psi.ch/' target='_blank'>PSI</a>) and hosted by the <a href='https://www.lib4ri.ch/' target='_blank'>Lib4RI</a>. DORA is based on the open source software framework <a href='https://islandora.ca/' target='_blank'>Islandora</a>, which uses Drupal, Fedora and SOLR as components. As a service to our users we developed an <a href='https://www.lib4ri.ch/files/poster_openrepos2019.pdf' target='_blank'>ingestion workflow</a>, which you can find freely available on <a href='https://github.com/Lib4RI/pub_db_lib' target='_blank'>GitHub</a>.
+with the four research institutes within the ETH Domain (<a href='https://www.eawag.ch/' target='_blank'>Eawag</a>, <a href='https://www.empa.ch/' target='_blank'>Empa</a>, <a href='https://www.wsl.ch/' target='_blank'>WSL</a> and <a href='https://www.psi.ch/' target='_blank'>PSI</a>) and hosted by the <a href='https://www.lib4ri.ch/' target='_blank'>Lib4RI</a>. DORA is based on the open source software framework <a href='https://islandora.ca/' target='_blank'>Islandora</a>, which uses Drupal, Fedora and SOLR as components. As a service to our users we developed an <a href='https://www.lib4ri.ch/sites/default/files/media/documents/poster_openrepos2019.pdf' target='_blank'>ingestion workflow</a>, which you can find freely available on <a href='https://github.com/Lib4RI/pub_db_lib' target='_blank'>GitHub</a>.
 <br> 
 <span style='margin-bottom:0px; position:relative; top:1.25em'>DORA acts simultaneously as:</span>
 <ul style='margin-bottom:0px; position:relative; top:-0.25em'>
@@ -88,20 +88,38 @@ $tableViewsDLs = array(
 		'_sum' => array( 'link' => '', 'result' => -1, 'query' => '' ),
 		'_PSI' => array( 'link' => '', 'result' => 47132, 'query' => '' ),
 	),
+	'row_view_23' => array(
+			'Views in 2023',
+		'Eawag' => array( 'link' => '', 'result' => 265781, 'query' => '' ),
+		'Empa' => array( 'link' => '', 'result' => 271734, 'query' => '' ),
+		'PSI'  => array( 'link' => '', 'result' => 247808, 'query' => '' ),
+		'WSL'  => array( 'link' => '', 'result' => 485534, 'query' => '' ),
+		'_sum' => array( 'link' => '', 'result' => -1, 'query' => '' ),
+		'_PSI' => array( 'link' => '', 'result' => 34898, 'query' => '' ),
+	),
+	'row_dl_23' => array(
+			'<!-- no top line -->Downloads in 2023',
+		'Eawag' => array( 'link' => '', 'result' => 201926, 'query' => '' ),
+		'Empa' => array( 'link' => '', 'result' => 216972, 'query' => '' ),
+		'PSI'  => array( 'link' => '', 'result' => 185399, 'query' => '' ),
+		'WSL'  => array( 'link' => '', 'result' => 368564, 'query' => '' ),
+		'_sum' => array( 'link' => '', 'result' => -1, 'query' => '' ),
+		'_PSI' => array( 'link' => '', 'result' => 30498, 'query' => '' ),
+	),
 	/*
 		VIEW NUMBERS VIA REPORTS FROM ISLANDORA USAGE STATS:
-	https://www.dora.lib4ri.ch/eawag/admin/reports/lib4ri_view_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2021&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2021&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
-	https://www.dora.lib4ri.ch/empa/admin/reports/lib4ri_view_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2021&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2021&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
-	https://www.dora.lib4ri.ch/psi/admin/reports/lib4ri_view_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2021&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2021&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
-		USE: https://www.dora.lib4ri.ch/psi/stats.vw
-	https://www.dora.lib4ri.ch/wsl/admin/reports/lib4ri_view_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2021&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2021&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
+	https://www.dora.lib4ri.ch/eawag/admin/reports/lib4ri_view_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2023&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2023&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
+	https://www.dora.lib4ri.ch/empa/admin/reports/lib4ri_view_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2023&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2023&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
+	https://www.dora.lib4ri.ch/psi/admin/reports/lib4ri_view_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2023&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2023&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
+		For PSI views better use: https://www.dora.lib4ri.ch/psi/stats.vw
+	https://www.dora.lib4ri.ch/wsl/admin/reports/lib4ri_view_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2023&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2023&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
 
 		DOWNLOAD NUMBERS VIA REPORTS FROM ISLANDORA USAGE STATS:
-	https://www.dora.lib4ri.ch/eawag/admin/reports/lib4ri_downloads_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2021&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2021&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
-	https://www.dora.lib4ri.ch/empa/admin/reports/lib4ri_downloads_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2021&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2021&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
-	https://www.dora.lib4ri.ch/psi/admin/reports/lib4ri_downloads_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2021&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2021&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
-		USE: https://www.dora.lib4ri.ch/psi/stats.dl
-	https://www.dora.lib4ri.ch/wsl/admin/reports/lib4ri_downloads_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2021&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2021&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
+	https://www.dora.lib4ri.ch/eawag/admin/reports/lib4ri_downloads_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2023&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2023&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
+	https://www.dora.lib4ri.ch/empa/admin/reports/lib4ri_downloads_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2023&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2023&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
+	https://www.dora.lib4ri.ch/psi/admin/reports/lib4ri_downloads_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2023&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2023&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
+		For PSI DLs better use: https://www.dora.lib4ri.ch/psi/stats.dl
+	https://www.dora.lib4ri.ch/wsl/admin/reports/lib4ri_downloads_stats_details?time_op=between&time%5Bvalue%5D%5Bdate%5D=&time%5Bmin%5D%5Bdate%5D=01%2F01%2F2023&time%5Bmax%5D%5Bdate%5D=12%2F31%2F2023&uid_op=%3D&uid=0&pid_op=contains&pid=&ip_op=contains&ip=
 	*/
 );
 
