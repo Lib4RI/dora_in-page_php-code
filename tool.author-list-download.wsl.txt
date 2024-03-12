@@ -1,0 +1,23 @@
+
+Description:
+	Will export PIDs of WSL author and their SAP-IDs
+	
+
+Requested by:
+	Sarah Last (approved during Jour Fixe DORA)
+	
+
+Drupal setup:
+	To be set up in https://www.dora.lib4ri.ch/node/add/page
+	Text format: 'PHP Code'
+	URL Path Settings (alias)  : 'aBcDefghijklm01234'	<== example/change!
+	Publishing Options: published
+	Must be 'published', also assign a secure/unguessable
+	alias or PIN (see confguration in page itself).
+	
+
+Drupal dependancy:
+	lib4ri_author_update module
+	
+
+

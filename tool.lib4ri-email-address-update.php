@@ -1,7 +1,7 @@
 <?php
 // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 // SECURITY: This page is intended to be PUBLISHED but only for a few users!
-$userOkAry = ['Stephanie','Bobby','Frank'];		// to get acccess for non-administrators
+$userOkAry = ['Stephanie','Bobby','Claudia','Frank'];		// to get access for non-administrators
 global $user;
 if ( empty($user) || ( !in_array($user->name,$userOkAry) && !in_array('administrator',$user->roles) ) ) {
 	drupal_set_title('Newspaper Recycling Dates');
