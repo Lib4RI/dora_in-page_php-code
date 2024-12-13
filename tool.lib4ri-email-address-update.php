@@ -146,16 +146,16 @@ foreach( $instAry as $inst ) {
 	include_once('/var/www/html/sites/all/modules/lib4ri_author_update/includes/utilities.inc');
 
 	$mailAry = [];
-	$mailAry['from'] = lib4ri_author_update_csv_to_array( $dirData.$fileAry['from'], ';', $mailIndex, false, true );
-	$mailAry['till'] = lib4ri_author_update_csv_to_array( $dirData.$fileAry['till'], ';', $mailIndex, false, true );
+	$mailAry['from'] = lib4ri_author_update_csv_to_array( $dirData.$fileAry['from'], ';', $mailIndex, 'strtolower', false, true );
+	$mailAry['till'] = lib4ri_author_update_csv_to_array( $dirData.$fileAry['till'], ';', $mailIndex, 'strtolower', false, true );
 
 	$addrAry = [];
 	foreach( $mailAry['till'] as $eMail => $userData ) {
 		if ( @isset($mailAry['from'][$eMail]) ) { continue; }
 		/* DEV */ if ( @empty(!$_GET['dev']) ) { echo "<br><pre>" . print_r( $userData, 1 ) . "</pre><br>"; }
 		$userData = array_map($workAry[$inst]['transform'],$userData);
-	//	$addrAry[] = rawurlencode($userData['FIRSTNAME'] . ' ' . $userData['LASTNAME'] . ' ') . '<' . $userData[$mailIndex] . '>';
-		$addrAry[] = $userData[$mailIndex];
+	//	$addrAry[] = rawurlencode($userData['FIRSTNAME'] . ' ' . $userData['LASTNAME'] . ' ') . '<' . strtolower($userData[$mailIndex]) . '>';
+		$addrAry[] = strtolower($userData[$mailIndex]);
 	}
 	$addrTotal = sizeof($addrAry);
 
